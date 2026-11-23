@@ -1,6 +1,8 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    kotlin("jvm") version "2.0.0"
-    kotlin("plugin.serialization") version "2.0.0"
+    kotlin("jvm") version "2.2.20"
+    kotlin("plugin.serialization") version "2.2.20"
     id("com.gradleup.shadow") version "8.3.5"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
     application
@@ -62,7 +64,7 @@ dependencies {
     implementation("org.slf4j:slf4j-api:2.0.13")
 
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:2.0.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:2.2.20")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
     testImplementation("org.testcontainers:testcontainers:$testcontainersVersion")
     testImplementation("org.testcontainers:postgresql:$testcontainersVersion")
@@ -71,15 +73,15 @@ dependencies {
 
 tasks {
     compileKotlin {
-        kotlinOptions {
-            jvmTarget = "21"
-            freeCompilerArgs += listOf("-Xopt-in=kotlin.RequiresOptIn")
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+            freeCompilerArgs.add("-Xopt-in=kotlin.RequiresOptIn")
         }
     }
 
     compileTestKotlin {
-        kotlinOptions {
-            jvmTarget = "21"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
 
