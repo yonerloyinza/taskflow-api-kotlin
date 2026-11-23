@@ -30,6 +30,7 @@ import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.plugins.ratelimit.RateLimit
 import io.ktor.server.routing.routing
+import io.ktor.server.testing.TestApplicationBuilder
 import io.ktor.server.testing.testApplication
 import java.time.LocalDateTime
 import java.util.UUID
@@ -147,7 +148,8 @@ class TaskRoutesTest {
     @Test
     fun `GET by id returns the task`() = testApplication {
         configureTestApp()
-        val created = client.postJson("/tasks", """{"title":"Detalle","assignee":"ana","dueDate":"2026-12-01T10:00:00Z"}""").jsonObject()
+        val created = client.postJson("/tasks", """{"title":"Detalle","assignee":"ana","dueDate":"2026-12-01T10:00:00Z"}""")
+            .jsonObject()
         val id = created.string("id")
 
         val response = client.get("/tasks/$id")
@@ -169,7 +171,9 @@ class TaskRoutesTest {
     @Test
     fun `PATCH updates the task`() = testApplication {
         configureTestApp()
-        val id = client.postJson("/tasks", """{"title":"Original","assignee":"ana","dueDate":"2026-12-01T10:00:00Z"}""").jsonObject().string("id")
+        val id = client.postJson("/tasks", """{"title":"Original","assignee":"ana","dueDate":"2026-12-01T10:00:00Z"}""")
+            .jsonObject()
+            .string("id")
 
         val response = client.patchJson("/tasks/$id", """{"status":"hecha"}""")
 
@@ -190,7 +194,9 @@ class TaskRoutesTest {
     @Test
     fun `DELETE returns 204`() = testApplication {
         configureTestApp()
-        val id = client.postJson("/tasks", """{"title":"Eliminar","assignee":"ana","dueDate":"2026-12-01T10:00:00Z"}""").jsonObject().string("id")
+        val id = client.postJson("/tasks", """{"title":"Eliminar","assignee":"ana","dueDate":"2026-12-01T10:00:00Z"}""")
+            .jsonObject()
+            .string("id")
 
         val response = client.delete("/tasks/$id")
 
@@ -207,7 +213,7 @@ class TaskRoutesTest {
         assertEquals(HttpStatusCode.NotFound, response.status)
     }
 
-    private fun io.ktor.server.testing.TestApplicationBuilder.configureTestApp() {
+    private fun TestApplicationBuilder.configureTestApp() {
         application {
             configureSerialization()
             configureStatusPages()
