@@ -115,7 +115,27 @@ class TaskRepositoryTest {
     @Test
     fun `update replaces mutable fields`() {
         val now = LocalDateTime.now()
-        val created = repository.insert("Original", "desc", TaskStatus.pendiente, TaskPriority.baja, "ana", now.plusDays(1), now)
+        val created = repository.insert("Original", "desc", TaskStatus.pendiente, TaskPriority.baja, "ana", now.plusDays(1), n          )
+        }
+
+        val (total, rows) = repository.findPage(TaskQuery(page = 2, limit = 2))
+
+        assertEquals(5L, total)
+        assertEquals(2, rows.size)
+    }
+
+    @Test
+    fun `update replaces mutable fields`() {
+        val now = LocalDateTime.now()
+        val created = repository.insert(
+            title = "Original",
+            description = "desc",
+            status = TaskStatus.pendiente,
+            priority = TaskPriority.baja,
+            assignee = "ana",
+            dueDate = now.plusDays(1),
+            now = now,
+        )
 
         val updated = repository.update(
             current = created,
@@ -134,13 +154,21 @@ class TaskRepositoryTest {
         assertEquals(TaskStatus.en_curso.name, found.status)
         assertEquals(TaskPriority.media.name, found.priority)
         assertEquals("beto", found.assignee)
-        assertTrue(found.updatedAt.isAfter(updated.createdAt.minusSeconds(1)))
+        assertTrue(found.updatedAt.isAfter(updated.createdAt))
     }
 
     @Test
     fun `delete removes the row`() {
         val now = LocalDateTime.now()
-        val created = repository.insert("Borrar", null, TaskStatus.hecha, TaskPriority.alta, "ana", now.plusDays(1), now)
+        val created = repository.insert(
+            title = "Borrar",
+            description = null,
+            status = TaskStatus.hecha,
+            priority = TaskPriority.alta,
+            assignee = "ana",
+            dueDate = now.plusDays(1),
+            now = now,
+        )
 
         assertTrue(repository.delete(created.id))
         assertNull(repository.findById(created.id))

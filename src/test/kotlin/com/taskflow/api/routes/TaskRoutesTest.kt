@@ -28,6 +28,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.content.TextContent
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
+import io.ktor.server.plugins.ratelimit.RateLimit
 import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
 import java.time.LocalDateTime
@@ -36,6 +37,7 @@ import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
@@ -210,6 +212,11 @@ class TaskRoutesTest {
             configureSerialization()
             configureStatusPages()
             install(Koin) { modules(module { single<TaskService> { service } }) }
+            install(RateLimit) {
+                register {
+                    rateLimiter(limit = 1_000, refillPeriod = 60.seconds)
+                }
+            }
             routing { taskRoutes() }
         }
     }
