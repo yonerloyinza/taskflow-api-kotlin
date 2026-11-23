@@ -102,8 +102,8 @@ class TaskRoutesTest {
 
         assertEquals(HttpStatusCode.OK, response.status)
         val payload = response.jsonObject()
-        assertEquals(1, payload.jsonObject()["data"]?.jsonArray?.size)
-        val meta = payload.jsonObject()["meta"]?.jsonObject
+        assertEquals(1, payload.jsonObject["data"]?.jsonArray?.size)
+        val meta = payload.jsonObject["meta"]?.jsonObject
         assertEquals(1, meta?.int("total"))
         assertEquals(1, meta?.int("page"))
         assertEquals(10, meta?.int("limit"))
@@ -222,7 +222,7 @@ class TaskRoutesTest {
         setBody(TextContent(body, ContentType.Application.Json))
     }
 
-    private fun HttpResponse.jsonObject(): JsonObject = Json.parseToJsonElement(bodyAsText()).jsonObject()
+    private suspend fun HttpResponse.jsonObject(): JsonObject = Json.parseToJsonElement(bodyAsText()).jsonObject
 
     private fun JsonObject.string(name: String): String = this[name]?.jsonPrimitive?.content ?: error("Missing field $name")
 

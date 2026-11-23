@@ -23,7 +23,7 @@ val logbackVersion = "1.5.6"
 val postgresqlVersion = "42.7.3"
 val flywayVersion = "10.20.0"
 val koinVersion = "4.0.0"
-val kotlinxSerializationVersion = "1.7.3"
+val kotlinxSerializationVersion = "1.9.0"
 val kotlinxCoroutinesVersion = "1.8.1"
 val testcontainersVersion = "1.20.1"
 
