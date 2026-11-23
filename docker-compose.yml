@@ -20,7 +20,7 @@ services:
       - "traefik.http.services.api-kotlin.loadbalancer.server.port=3000"
       - "traefik.http.routers.api-kotlin.middlewares=secHeaders@file"
     healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/health | grep -q '"status":"ok"'"]
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/health | grep -q taskflow-api-kotlin"]
       interval: 30s
       timeout: 10s
       retries: 3
