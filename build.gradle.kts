@@ -77,7 +77,7 @@ tasks {
     compileKotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
-            freeCompilerArgs.add("-Xopt-in=kotlin.RequiresOptIn")
+            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
         }
     }
 

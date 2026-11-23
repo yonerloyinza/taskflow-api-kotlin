@@ -40,7 +40,8 @@ fun Route.openApiRoutes() {
     }
 }
 
-private fun loadSpec(): String? = javaClass.classLoader.getResourceAsStream(OPENAPI_RESOURCE)
+private fun loadSpec(): String? = Thread.currentThread().contextClassLoader
+    .getResourceAsStream(OPENAPI_RESOURCE)
     ?.bufferedReader()
     ?.use { it.readText() }
 
