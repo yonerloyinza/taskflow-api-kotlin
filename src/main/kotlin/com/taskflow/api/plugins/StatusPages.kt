@@ -10,6 +10,7 @@ import io.ktor.server.application.install
 import io.ktor.server.plugins.BadRequestException
 import io.ktor.server.plugins.statuspages.StatusPages
 import io.ktor.server.plugins.statuspages.exception
+import io.ktor.server.request.uri
 import io.ktor.server.response.respond
 
 fun Application.configureStatusPages() {
@@ -48,7 +49,7 @@ fun Application.configureStatusPages() {
         }
 
         exception<Throwable> { call, cause ->
-            call.application.log.error("Unhandled exception while processing ${call.request.uri}", cause)
+            call.application.environment.log.error("Unhandled exception while processing ${call.request.uri}", cause)
             call.respond(
                 HttpStatusCode.InternalServerError,
                 errorResponse(

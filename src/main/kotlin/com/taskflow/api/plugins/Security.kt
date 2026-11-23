@@ -5,7 +5,7 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
-import io.ktor.server.plugins.cors.CORS
+import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.plugins.defaultheaders.DefaultHeaders
 import io.ktor.server.plugins.ratelimit.RateLimit
 import kotlin.time.Duration.Companion.seconds
@@ -39,7 +39,7 @@ fun Application.configureSecurity(config: AppConfig) {
                 limit = if (config.rateLimitEnabled) config.rateLimitRequests else Int.MAX_VALUE,
                 refillPeriod = config.rateLimitWindowSeconds.seconds,
             )
-            requestKey { call -> call.request.origin.remoteHost }
+            requestKey { call -> call.request.local.remoteHost }
         }
     }
 }

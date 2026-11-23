@@ -1,7 +1,7 @@
 package com.taskflow.api.db
 
 import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.datetime.datetime
+import org.jetbrains.exposed.sql.javatime.datetime
 
 object Tasks : Table("\"Task\"") {
     val id = varchar("id", 36)

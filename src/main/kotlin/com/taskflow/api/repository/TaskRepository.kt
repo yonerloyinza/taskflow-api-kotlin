@@ -107,7 +107,7 @@ class TaskRepository(private val database: Database) {
     }
 
     fun delete(id: String): Boolean = transaction(database) {
-        Tasks.deleteWhere { Tasks.id eq id } > 0
+        Tasks.deleteWhere { with(it) { Tasks.id eq id } } > 0
     }
 
     private fun TaskQuery.predicate(): Op<Boolean>? = with(SqlExpressionBuilder) {

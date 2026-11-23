@@ -24,8 +24,8 @@ object DatabaseFactory {
         return Database.connect(HikariDataSource(hikari))
     }
 
-    private const val CONNECTION_TIMEOUT_MS = 10_000
-    private const val IDLE_TIMEOUT_MS = 60_000
-    private const val MAX_LIFETIME_MS = 600_000
+    private const val CONNECTION_TIMEOUT_MS = 10_000L
+    private const val IDLE_TIMEOUT_MS = 60_000L
+    private const val MAX_LIFETIME_MS = 600_000L
     private const val POOL_NAME = "taskflow-kotlin-pool"
 }

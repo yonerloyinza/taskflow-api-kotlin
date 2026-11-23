@@ -14,7 +14,7 @@ import com.taskflow.api.routes.taskRoutes
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.netty.Netty
-import io.ktor.server.netty.embeddedServer
+import io.ktor.server.engine.embeddedServer
 import io.ktor.server.routing.routing
 import org.koin.ktor.plugin.Koin
 
