@@ -1,0 +1,55 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-taskflow-api-kotlin
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build on VPS and restart container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+
+      - name: Deploy to VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+        run: |
+          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            "${VPS_USER}@${VPS_HOST}" 'bash -s' <<'REMOTE'
+          set -euo pipefail
+          cd /opt/taskflow-ecosystem/taskflow-api-kotlin
+          git fetch origin main
+          git reset --hard origin/main
+          docker compose up -d --build --no-deps api-kotlin
+          docker image prune -f
+          REMOTE
+
+      - name: Verify health endpoint
+        run: |
+          for attempt in $(seq 1 12); do
+            if curl -sf "https://taskflow-api-kotlin.xprad.com/health" | grep -q '"status":"ok"'; then
+              echo "Health check OK"
+              exit 0
+            fi
+            echo "Attempt ${attempt}/12 failed, retrying in 5s..."
+            sleep 5
+          done
+          echo "Health check failed"
+          curl -s "https://taskflow-api-kotlin.xprad.com/health" || true
+          exit 1

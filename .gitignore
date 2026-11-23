@@ -1,0 +1,41 @@
+# Gradle
+.gradle/
+build/
+out/
+*.jar
+*.war
+*.ear
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Docker
+docker-compose.override.yml
+
+# Testcontainers
+.testcontainers/
+
+# Coverage
+build/reports/jacoco/
+build/reports/coverage/
+
+# Kotlin
+*.klib
+*.klibcache
