@@ -5,6 +5,8 @@ import com.taskflow.api.model.TaskPriority
 import com.taskflow.api.model.TaskRecord
 import com.taskflow.api.model.TaskStatus
 import com.taskflow.api.service.TaskQuery
+import java.time.LocalDateTime
+import java.util.UUID
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.Op
 import org.jetbrains.exposed.sql.ResultRow
@@ -16,8 +18,6 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
-import java.time.LocalDateTime
-import java.util.UUID
 
 class TaskRepository(private val database: Database) {
 

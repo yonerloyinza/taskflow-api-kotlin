@@ -1,11 +1,11 @@
 package com.taskflow.api.dto
 
 import io.ktor.http.HttpStatusCode
+import java.time.Instant
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
-import java.time.Instant
 
 @Serializable
 data class ErrorResponse(

@@ -8,9 +8,9 @@ import io.ktor.server.application.call
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
+import java.time.Instant
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.transaction
-import java.time.Instant
 
 fun Route.healthRoutes(config: AppConfig, database: Database) {
     get("/health") {

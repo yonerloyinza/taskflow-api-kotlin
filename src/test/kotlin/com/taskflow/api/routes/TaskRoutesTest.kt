@@ -30,6 +30,12 @@ import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
+import java.time.LocalDateTime
+import java.util.UUID
+import kotlin.test.AfterTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
@@ -40,12 +46,6 @@ import kotlinx.serialization.json.jsonPrimitive
 import org.koin.core.context.stopKoin
 import org.koin.dsl.module
 import org.koin.ktor.plugin.Koin
-import java.time.LocalDateTime
-import java.util.UUID
-import kotlin.test.AfterTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class TaskRoutesTest {
 

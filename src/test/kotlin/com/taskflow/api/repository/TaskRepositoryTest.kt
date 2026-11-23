@@ -6,6 +6,12 @@ import com.taskflow.api.db.Migrations
 import com.taskflow.api.model.TaskPriority
 import com.taskflow.api.model.TaskStatus
 import com.taskflow.api.service.TaskQuery
+import java.time.LocalDateTime
+import java.util.UUID
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.BeforeAll
@@ -14,12 +20,6 @@ import org.junit.jupiter.api.Test
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
-import java.time.LocalDateTime
-import java.util.UUID
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
-import kotlin.test.assertTrue
 
 @Testcontainers
 class TaskRepositoryTest {
