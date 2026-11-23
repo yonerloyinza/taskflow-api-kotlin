@@ -13,6 +13,7 @@ import com.taskflow.api.model.TaskStatus
 import com.taskflow.api.repository.TaskRepository
 import com.taskflow.api.validation.TaskValidator
 import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -56,7 +57,7 @@ class TaskServiceImpl(private val repository: TaskRepository) : TaskService {
         val errors = TaskValidator.validateCreate(request)
         if (errors.isNotEmpty()) throw ApiValidationException(errors)
 
-        val now = LocalDateTime.now()
+        val now = LocalDateTime.now().truncatedTo(ChronoUnit.MILLIS)
         val record = repository.insert(
             title = request.title,
             description = request.description,
@@ -100,7 +101,7 @@ class TaskServiceImpl(private val repository: TaskRepository) : TaskService {
             priority = request.priority ?: TaskPriority.valueOf(current.priority),
             assignee = request.assignee ?: current.assignee,
             dueDate = request.dueDate?.let { TaskValidator.parseDueDate(it) } ?: current.dueDate,
-            now = LocalDateTime.now(),
+            now = LocalDateTime.now().truncatedTo(ChronoUnit.MILLIS),
         )
         updated.toDto()
     }
