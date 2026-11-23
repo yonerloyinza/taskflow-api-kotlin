@@ -14,6 +14,7 @@ object Migrations {
             .validateOnMigrate(true)
             .load()
 
+        flyway.repair()
         return flyway.migrate().migrationsExecuted
     }
 }
