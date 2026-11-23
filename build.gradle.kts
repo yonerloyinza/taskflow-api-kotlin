@@ -94,7 +94,7 @@ tasks {
         archiveClassifier.set("all")
         mergeServiceFiles()
         manifest {
-            attributes("Main-Class": "com.taskflow.api.ApplicationKt")
+            attributes(mapOf("Main-Class" to "com.taskflow.api.ApplicationKt"))
         }
     }
 
