@@ -41,9 +41,10 @@
 - [x] 5b. CI/CD — GitHub Actions: `ci.yml` (ktlint + test + shadowJar) y `deploy.yml` (SSH + build en VPS)
 - [x] 5c. Smoke test — `/health`, CRUD completo, filtros, 400/404 y `/swagger` verificados en producción
 
-## Paso 6 — Documentación (PENDIENTE)
-- [ ] README interno — variables de entorno, endpoints, cómo levantar en local
-- [ ] `docs/` — `01-architecture.md` + `04-ai-log.md` actualizados
+## Paso 6 — Documentación (COMPLETADO)
+- [x] `README.md` — stack, endpoints, variables de entorno, desarrollo local, CI/CD y base de datos
+- [x] `docs/01-architecture.md` + `docs/04-ai-log.md` actualizados
+- [x] Documentación OpenAPI servida: `/openapi.yaml`, `/openapi` (JSON), `/docs` y `/swagger`
 
 ## infra/variables (COMPLETADO)
 - [x] `.env.kotlin.example` + `.env.kotlin` en `/opt/taskflow/.env.kotlin` del VPS

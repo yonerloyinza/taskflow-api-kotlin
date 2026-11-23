@@ -23,3 +23,7 @@
 - `https://taskflow-api-kotlin.xprad.com/health` → `{"status":"ok","service":"taskflow-api-kotlin","database":"up"}`
 - Certificado Let's Encrypt emitido para `taskflow-api-kotlin.xprad.com`
 - CRUD completo, filtros, paginación, 400/404 y `/swagger` verificados contra la BD real
+## 2026-11-23 — Paso 6 (documentación + OpenAPI)
+- `README.md` completo: stack, tabla de endpoints, variables de entorno, desarrollo local, CI/CD y notas de base de datos
+- OpenAPI servido en `/openapi.yaml` (YAML), `/openapi` (JSON, convertido en caliente) y Swagger UI en `/docs` y `/swagger`
+- Roadmap actualizado: pasos 0 a 6 completos
